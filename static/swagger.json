@@ -1,0 +1,769 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Personal Garment Pattern Resource",
+    "description": "This is..",
+    "contact": {
+      "email": "tfoutz@byui.edu"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Person",
+      "description": "Personal information about the people whose body measurements are to be taken"
+    },
+    {
+      "name": "Body Measurements",
+      "description": "The body measurements used to draft patterns and associate with sizes."
+    },
+    {
+      "name": "Pattern",
+      "description": "PDF files of drafted patterns fit to body measurements."
+    }
+  ],
+  "paths": {
+    "/person": {
+      "post": {
+        "tags": [
+          "Person"
+        ],
+        "summary": "Add a new person",
+        "description": "Add a new person",
+        "operationId": "addPerson",
+        "requestBody": {
+          "description": "Add a new person",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Person"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/person/{personId}": {
+      "put": {
+        "tags": [
+          "Person"
+        ],
+        "summary": "Update personal information",
+        "description": "Update an existing person by Id",
+        "operationId": "updatePerson",
+        "parameters": [
+          {
+            "name": "personId",
+            "in": "path",
+            "description": "ID of person to update",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update personal information",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Person"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Person not found"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Person"
+        ],
+        "summary": "Retrieve personal information",
+        "description": "Retrieve personal information",
+        "operationId": "findPerson",
+        "parameters": [
+          {
+            "name": "personId",
+            "in": "path",
+            "description": "ID of person to return",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/body_measurements": {
+      "post": {
+        "tags": [
+          "Body Measurements"
+        ],
+        "summary": "Add new set of body measurements",
+        "description": "Add new set of body measurements",
+        "operationId": "addBodyMeasurements",
+        "requestBody": {
+          "description": "Add new set of body measurements",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BodyMeasurements"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/body_measurements/{personId}": {
+      "put": {
+        "tags": [
+          "Body Measurements"
+        ],
+        "summary": "Update body measurements",
+        "description": "Update body measurements",
+        "operationId": "updateBodyMeasurements",
+        "parameters": [
+          {
+            "name": "personId",
+            "in": "path",
+            "description": "ID of person to update",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update body measurements",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BodyMeasurements"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Person not found"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Body Measurements"
+        ],
+        "summary": "Retrieve body measurements",
+        "description": "Retrieve body measurements",
+        "operationId": "findBodyMeasurements",
+        "parameters": [
+          {
+            "name": "personId",
+            "in": "path",
+            "description": "ID of person to return",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/pattern/mens/sloper/torso/front/{personId}": {
+      "get": {
+        "tags": [
+          "Pattern"
+        ],
+        "description": "Download mens front torso sloper pattern",
+        "operationId": "getMensSloperTorsoFrontPDF",
+        "parameters": [
+          {
+            "name": "personId",
+            "in": "path",
+            "description": "ID of person to return",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A PDF file"
+          }
+        }
+      }
+    },
+    "/pattern/mens/sloper/torso/back/{personId}": {
+      "get": {
+        "tags": [
+          "Pattern"
+        ],
+        "description": "Download mens back torso sloper pattern",
+        "operationId": "getMensSloperTorsoBackPDF",
+        "parameters": [
+          {
+            "name": "personId",
+            "in": "path",
+            "description": "ID of person to return",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A PDF file"
+          }
+        }
+      }
+    },
+    "/pattern/womens/sloper/bodice/front/{personId}": {
+      "get": {
+        "tags": [
+          "Pattern"
+        ],
+        "description": "Download womens front bodice sloper pattern",
+        "operationId": "getWomensSloperBodiceFrontPDF",
+        "parameters": [
+          {
+            "name": "personId",
+            "in": "path",
+            "description": "ID of person to return",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A PDF file"
+          }
+        }
+      }
+    },
+    "/pattern/womens/sloper/bodice/back/{personId}": {
+      "get": {
+        "tags": [
+          "Pattern"
+        ],
+        "description": "Download womens back bodice sloper pattern",
+        "operationId": "getWomensSloperBodiceBackPDF",
+        "parameters": [
+          {
+            "name": "personId",
+            "in": "path",
+            "description": "ID of person to return",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A PDF file"
+          }
+        }
+      }
+    },
+    "/pattern/womens/sloper/skirt/front/{personId}": {
+      "get": {
+        "tags": [
+          "Pattern"
+        ],
+        "description": "Download womens front skirt sloper pattern",
+        "operationId": "getWomensSloperSkirtFrontPDF",
+        "parameters": [
+          {
+            "name": "personId",
+            "in": "path",
+            "description": "ID of person to return",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A PDF file"
+          }
+        }
+      }
+    },
+    "/pattern/womens/sloper/skirt/back/{personId}": {
+      "get": {
+        "tags": [
+          "Pattern"
+        ],
+        "description": "Download womens back skirt sloper pattern",
+        "operationId": "getWomensSloperSkirtBackPDF",
+        "parameters": [
+          {
+            "name": "personId",
+            "in": "path",
+            "description": "ID of person to return",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A PDF file"
+          }
+        }
+      }
+    },
+    "/pattern/womens/sloper/sleeve/{personId}": {
+      "get": {
+        "tags": [
+          "Pattern"
+        ],
+        "description": "Download womens sleeve sloper pattern",
+        "operationId": "getWomensSloperSleevePDF",
+        "parameters": [
+          {
+            "name": "personId",
+            "in": "path",
+            "description": "ID of person to return",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A PDF file"
+          }
+        }
+      }
+    },
+    "/pattern/mens/sloper/sleeve/{personId}": {
+      "get": {
+        "tags": [
+          "Pattern"
+        ],
+        "description": "Download mens sleeve sloper pattern",
+        "operationId": "getMensSloperSleevePDF",
+        "parameters": [
+          {
+            "name": "personId",
+            "in": "path",
+            "description": "ID of person to return",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A PDF file"
+          }
+        }
+      }
+    },
+    "/pattern/unisex/sloper/pants/front/{personId}": {
+      "get": {
+        "tags": [
+          "Pattern"
+        ],
+        "description": "Download unisex sloper pants fron pattern",
+        "operationId": "getUnisexSloperPantsFrontPDF",
+        "parameters": [
+          {
+            "name": "personId",
+            "in": "path",
+            "description": "ID of person to return",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A PDF file"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Person": {
+        "type": "object",
+        "properties": {
+          "birth_year": {
+            "type": "integer",
+            "format": "int64",
+            "example": 1999
+          },
+          "is_male": {
+            "type": "boolean",
+            "example": true
+          },
+          "is_metric": {
+            "type": "boolean",
+            "example": false
+          },
+          "height": {
+            "type": "number",
+            "format": "float",
+            "example": 69.75
+          },
+          "weight": {
+            "type": "number",
+            "format": "float",
+            "example": 235.5
+          },
+          "email": {
+            "type": "string",
+            "example": "email@email.email"
+          },
+          "country_code": {
+            "type": "string",
+            "example": "US"
+          }
+        }
+      },
+      "BodyMeasurements": {
+        "type": "object",
+        "properties": {
+          "person_id": {
+            "type": "integer",
+            "format": "int64",
+            "example": null
+          },
+          "neck": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "bust": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "chest": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "waist": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "abdomen": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "hip": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "center_length_front": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "center_length_back": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "full_length_front": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "full_length_back": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "shoulder_slope_front": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "shoulder_slope_back": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "new_strap": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "bust_depth": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "bust_radius": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "bust_span": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "side_length": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "neck_front": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "neck_back": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "shoulder_length": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "across_shoulder_front": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "across_shoulder_back": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "across_front": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "across_back": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "bust_arc": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "back_arc": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "waist_arc_front": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "waist_arc_back": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "abdomen_arc_front": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "abdomen_arc_back": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "hip_arc_front": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "hip_arc_back": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "hip_depth_front": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "hip_depth_side": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "hip_depth_back": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "knee_length": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "ankle_length": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "inseam": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "floor_length": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "crotch_length": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "crotch_depth": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "arm_length": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "elbow_length": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "cap_height": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "bicep": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "wrist": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "hand": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "thigh": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "knee": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "calf": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          },
+          "ankle": {
+            "type": "number",
+            "format": "float",
+            "example": null
+          }
+        }
+      }
+    }
+  }
+}

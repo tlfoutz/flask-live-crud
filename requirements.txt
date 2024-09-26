@@ -1,0 +1,8 @@
+flask
+flask-swagger-ui
+flask_cors
+Flask-SQLAlchemy
+matplotlib
+numpy
+psycopg2-binary
+scipy
